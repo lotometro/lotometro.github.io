@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lotometro - Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="jumbotron">
+        <h1>Lotômetro</h1>
+        <h2>Faça login ou cadastre-se</h2>
+        <br />
+        <form method="post" action="/login">
+          <div class="form-group">
+            <label for="username" class="text-center">Login</label>
+            <input
+              type="text"
+              name="username"
+              value=""
+              placeholder="Digite seu login"
+              class="form-control"
+            />
+            <br />
+          </div>
+
+          <div class="form-group">
+            <label for="password" class="text-center">Senha</label>
+            <input
+              type="password"
+              name="password"
+              value=""
+              placeholder="Digite sua Senha"
+              class="form-control"
+            />
+            <br />
+          </div>
+          <input type="submit" value="Entrar" class="btn btn-primary btn-lg" />
+          <br />
+        </form>
+
+        <form action="/novaconta">
+          <br />
+
+          <input
+            type="submit"
+            value="Cadastrar-se"
+            class="btn btn-primary btn-lg"
+          />
+          <br />
+          <br />
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
