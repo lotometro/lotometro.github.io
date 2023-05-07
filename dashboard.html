@@ -61,13 +61,13 @@
         <script>
           var ctx = document.getElementById("myChartPublico").getContext("2d");
           var myChartPublico = new Chart(ctx, {
-            type: "pie",
+            type: "doughnut",
             data: {
               labels: ["Ocupado", "Vazio", "Margem de erro"],
               datasets: [
                 {
-                  label: "Cores favoritas",
-                  data: [19, 12, 3],
+                  label: "Ocupação",
+                  data: [77, 38, 15],
                   backgroundColor: [
                     "rgba(255, 99, 132, 0.8)",
                     "rgba(54, 162, 235, 0.8)",
@@ -141,12 +141,12 @@
             .getElementById("myChartPersonalizado")
             .getContext("2d");
           var myChartPersonalizado = new Chart(ctx, {
-            type: "pie",
+            type: "doughnut",
             data: {
               labels: ["Ocupado", "Vazio", "Margem de erro"],
               datasets: [
                 {
-                  label: "Cores favoritas",
+                  label: "Ocupação",
                   data: [50, 10, 5],
                   backgroundColor: [
                     "rgba(255, 99, 132, 0.8)",
