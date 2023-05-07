@@ -7,76 +7,189 @@
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/css/bootstrap.min.css"
+      integrity="sha512-G0q3Z0pABYdPjC32MVo/GxdEiQmcdyR73zX90jxvjxpt3Zwy3opbD3lBHDv0nLw/PynNzf+bNfxiMrgkkTpNfw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   </head>
   <body>
     <div class="container">
+      <br />
+      <h4>Bem vindo User, selecione um local</h4>
+      <br />
       <div class="jumbotron">
         <h2>Locais Públicos</h2>
         <form action="/principal/publicos" method="post">
-
           <div class="form-group">
-              <select asp-items="ViewBag.LocaisPublicos" class="form-control"></select>
+            <select
+              asp-items="ViewBag.LocaisPublicos"
+              class="form-control"
+            ></select>
           </div>
-  
+
           <table class="table table-responsive table-striped">
-              <tr>
-                  <th>Ações</th>
-                  <th>Local</th>
-                  <th>Descrição</th>
-                  <th>Qtd Pessoas atualmente</th>
-                  <th>Percentual</th>
-                  <th>Ultima atualização</th>
-                  <th>Google Maps</th>
-              </tr>
-              <tr>
-                  <td><a href="ver"></a>atualizar</td>
-                  <td>Shopping Plaza</td>
-                  <td>Praça alimentação</td>
-                  <td>77 pessoas</td>
-                  <td>67%</td>
-                  <td><a href="https://www.google.com/maps">ver mapa</a></td>
-              </tr>
+            <tr>
+              <th>Ações</th>
+              <th>Local</th>
+              <th>Descrição</th>
+              <th>Qtd Pessoas atualmente</th>
+              <th>Percentual</th>
+              <th>Ultima atualização</th>
+              <th>Google Maps</th>
+            </tr>
+            <tr>
+              <td><a href="dashboard">atualizar</a></td>
+              <td>Shopping Plaza</td>
+              <td>Praça alimentação</td>
+              <td>77 pessoas</td>
+              <td>67%</td>
+              <td><p id="data-atual-pu"></p></td>
+              <td><a href="https://www.google.com/maps">ver mapa</a></td>
+            </tr>
           </table>
           <br />
         </form>
+        <div class="container">
+          <h4>Shopping Plaza - Praça alimentação</h4>
+          <canvas id="myChartPublico"></canvas>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+          var ctx = document.getElementById("myChartPublico").getContext("2d");
+          var myChartPublico = new Chart(ctx, {
+            type: "pie",
+            data: {
+              labels: ["Ocupado", "Vazio", "Margem de erro"],
+              datasets: [
+                {
+                  label: "Cores favoritas",
+                  data: [19, 12, 3],
+                  backgroundColor: [
+                    "rgba(255, 99, 132, 0.8)",
+                    "rgba(54, 162, 235, 0.8)",
+                    "rgba(255, 206, 86, 0.8)",
+                  ],
+                  borderColor: [
+                    "rgba(255, 99, 132, 1)",
+                    "rgba(54, 162, 235, 1)",
+                    "rgba(255, 206, 86, 1)",
+                  ],
+                  borderWidth: 1,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              plugins: {
+                legend: {
+                  position: "top",
+                },
+                title: {
+                  display: true,
+                  text: "Cores favoritas",
+                },
+              },
+            },
+          });
+        </script>
+      </div>
       <div class="jumbotron">
-
         <h2>Locais Personalizados</h2>
         <br />
         <form action="/principal/personalizados" method="post">
-    
-            <div class="form-group">
-                <select asp-items="ViewBag.LocaisPublicos" class="form-control"></select>
-            </div>
-    
-            <table class="table table-responsive table-striped">
-                <tr>
-                    <th>Ações</th>
-                    <th>Local</th>
-                    <th>Descrição</th>
-                    <th>Qtd Pessoas atualmente</th>
-                    <th>Percentual</th>
-                    <th>Ultima atualização</th>
-                    <th>Google Maps</th>
-                </tr>
-                <tr>
-                    <td><a href="ver"></a>atualizar</td>
-                    <td>Correios</td>
-                    <td>Recepção</td>
-                    <td>40 pessoas</td>
-                    <td>80%</td>
-                    <td><a href="https://www.google.com/maps">ver mapa</a></td>
-                </tr>
-    
-            </table>
-    
-            <br />
+          <div class="form-group">
+            <select
+              asp-items="ViewBag.LocaisPublicos"
+              class="form-control"
+            ></select>
+          </div>
+
+          <table class="table table-responsive table-striped">
+            <tr>
+              <th>Ações</th>
+              <th>Local</th>
+              <th>Descrição</th>
+              <th>Qtd Pessoas atualmente</th>
+              <th>Percentual</th>
+              <th>Ultima atualização</th>
+              <th>Google Maps</th>
+            </tr>
+            <tr>
+              <td><a href="dashboard">atualizar</a></td>
+              <td>Correios</td>
+              <td>Recepção</td>
+              <td>40 pessoas</td>
+              <td>80%</td>
+              <td><p id="data-atual-pr"></p></td>
+              <td><a href="https://www.google.com/maps">ver mapa</a></td>
+            </tr>
+          </table>
+
+          <br />
         </form>
+        <div class="container">
+          <h4>Correios - Recepção</h4>
+          <canvas id="myChartPersonalizado"></canvas>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+          var ctx = document
+            .getElementById("myChartPersonalizado")
+            .getContext("2d");
+          var myChartPersonalizado = new Chart(ctx, {
+            type: "pie",
+            data: {
+              labels: ["Ocupado", "Vazio", "Margem de erro"],
+              datasets: [
+                {
+                  label: "Cores favoritas",
+                  data: [50, 10, 5],
+                  backgroundColor: [
+                    "rgba(255, 99, 132, 0.8)",
+                    "rgba(54, 162, 235, 0.8)",
+                    "rgba(255, 206, 86, 0.8)",
+                  ],
+                  borderColor: [
+                    "rgba(255, 99, 132, 1)",
+                    "rgba(54, 162, 235, 1)",
+                    "rgba(255, 206, 86, 1)",
+                  ],
+                  borderWidth: 1,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              plugins: {
+                legend: {
+                  position: "top",
+                },
+                title: {
+                  display: true,
+                  text: "Cores favoritas",
+                },
+              },
+            },
+          });
+        </script>
       </div>
     </div>
   </body>
+  <script>
+    const dataAtual = new Date();
+    const elementoDataAtualpu = document.getElementById("data-atual-pu");
+    const elementoDataAtualpr = document.getElementById("data-atual-pr");
+    const hora = dataAtual.getHours();
+    const min = dataAtual.getMinutes();
+    const sec = dataAtual.getSeconds();
+    const dia = dataAtual.getDate();
+    const mes = dataAtual.getMonth() + 1;
+    const ano = dataAtual.getFullYear();
+    elementoDataAtualpu.innerHTML = `${dia}/${mes}/${ano}-${hora}:${min}:${sec}`;
+    elementoDataAtualpr.innerHTML = `${dia}/${mes}/${ano}-${hora}:${min}:${sec}`;
+  </script>
 </html>
-  
-
- 
