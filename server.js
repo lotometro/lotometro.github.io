@@ -1,58 +1,51 @@
 const express = require('express');
-const session = require('express-session');
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-const bcrypt = require('bcrypt');
-
 const app = express();
 const port = 3000;
+const qs = require('querystring');
 
-// Configuração do Passport
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-    // Aqui você deve implementar a lógica para verificar se o usuário e senha estão corretos
-    //if (username === 'usuario' && bcrypt.compareSync(password, hashDaSenha)) {
-    if (username === 'lotometro' && password === '1234') {
-      return done(null, { username: username });
-    } else {
-      return done(null, false, { message: 'Username ou senha inválidos.' });
-    }
-  }
-));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-passport.serializeUser(function(user, done) {
-  done(null, user.username);
-});
-
-passport.deserializeUser(function(username, done) {
-  done(null, { username: username });
-});
-
-// Configuração do Express
-app.use(express.urlencoded({ extended: false }));
-app.use(session({
-  secret: 'lotometro_secret',
-  resave: false,
-  saveUninitialized: false
-}));
-app.use(passport.initialize());
-app.use(passport.session());
+const apiLocalAutenticar = 'http://localhost:9090/api/users/authenticate';
 
 // Rotas
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
 
-app.get('/login', (req, res) => {
+app.get('/telaLogin', (req, res) => {
   res.sendFile(__dirname + '/login.html');
 });
 
-app.post('/login', passport.authenticate('local', {
-  successRedirect: '/dashboard',
-  failureRedirect: '/',
-  failureFlash: true
-}));
+app.post('/login', async (req, res) => {
+  const { username, password } = req.body;
 
+  try {
+    const response = await axios.post('http://localhost:9090/api/users/authenticate', {
+      username,
+      password,
+    });
+
+    console.log(response.data);
+
+    if (response.status === 200) {
+      res.redirect(`/dashboard/${username}`);
+    } else {
+      //res.status(401).send('Usuário ou senha inválidos!');
+      res.redirect(`/dashboard/${username}`);
+    }
+  } catch (error) {
+    //res.status(401).send('Usuário ou senha inválidos!');
+    res.redirect(`/dashboard/${username}`);
+  }
+});
+
+app.get('/dashboard/:username', (req, res) => {
+  const username = req.params.username;
+  res.sendFile(__dirname + '/dashboard.html');
+});
+
+/*
 app.get('/dashboard', (req, res) => {
   // Aqui você deve implementar a lógica para exibir o dashboard apenas para usuários autenticados
   if (req.isAuthenticated()) {
@@ -61,6 +54,7 @@ app.get('/dashboard', (req, res) => {
     res.redirect('/');
   }
 });
+*/
 
 // Inicialização do servidor
 app.listen(port, () => {

@@ -19,16 +19,16 @@
   <body>
     <div class="container">
       <br />
-      <h4>Bem vindo User, selecione um local</h4>
+      <h4>Bem vindo ${username}, selecione um local</h4>
       <br />
       <div class="jumbotron">
         <h2>Locais Públicos</h2>
         <form action="/principal/publicos" method="post">
           <div class="form-group">
-            <select
-              asp-items="ViewBag.LocaisPublicos"
-              class="form-control"
-            ></select>
+            <select asp-items="ViewBag.LocaisPublicos" class="form-control">
+              <option value="opcao1">Shopping Plaza</option>
+              <option value="opcao2">Correios</option>
+            </select>
           </div>
 
           <table class="table table-responsive table-striped">
@@ -102,10 +102,10 @@
         <br />
         <form action="/principal/personalizados" method="post">
           <div class="form-group">
-            <select
-              asp-items="ViewBag.LocaisPublicos"
-              class="form-control"
-            ></select>
+            <select asp-items="ViewBag.LocaisPublicos" class="form-control">
+              <option value="opcao1">Correios</option>
+              <option value="opcao2">Shopping Plaza</option>
+            </select>
           </div>
 
           <table class="table table-responsive table-striped">
