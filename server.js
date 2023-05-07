@@ -47,10 +47,6 @@ app.get('/telaLogin', (req, res) => {
   res.sendFile(__dirname + '/login.html');
 });
 
-app.get('/telaInicial', (req, res) => {
-  res.sendFile(__dirname + '/telaInicial.html');
-});
-
 app.post('/login', passport.authenticate('local', {
   successRedirect: '/dashboard',
   failureRedirect: '/',
@@ -60,7 +56,7 @@ app.post('/login', passport.authenticate('local', {
 app.get('/dashboard', (req, res) => {
   // Aqui você deve implementar a lógica para exibir o dashboard apenas para usuários autenticados
   if (req.isAuthenticated()) {
-    res.send('Dashboard do Lotômetro');
+    res.sendFile(__dirname + '/dashboard.html');
   } else {
     res.redirect('/');
   }
