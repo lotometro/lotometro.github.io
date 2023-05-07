@@ -11,7 +11,8 @@ const port = 3000;
 passport.use(new LocalStrategy(
   function(username, password, done) {
     // Aqui você deve implementar a lógica para verificar se o usuário e senha estão corretos
-    if (username === 'usuario' && bcrypt.compareSync(password, hashDaSenha)) {
+    //if (username === 'usuario' && bcrypt.compareSync(password, hashDaSenha)) {
+    if (username === 'lotometro' && password === '1234') {
       return done(null, { username: username });
     } else {
       return done(null, false, { message: 'Username ou senha inválidos.' });
