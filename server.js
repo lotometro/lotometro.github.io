@@ -42,8 +42,12 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
 
-app.get('/login', (req, res) => {
+app.get('/telaLogin', (req, res) => {
   res.sendFile(__dirname + '/login.html');
+});
+
+app.get('/telaInicial', (req, res) => {
+  res.sendFile(__dirname + '/telaInicial.html');
 });
 
 app.post('/login', passport.authenticate('local', {
