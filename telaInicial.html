@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lotometro - Bem vindo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="jumbotron">
+        <h2>Locais Públicos</h2>
+        <form action="/principal/publicos" method="post">
+
+          <div class="form-group">
+              <select asp-items="ViewBag.LocaisPublicos" class="form-control"></select>
+          </div>
+  
+          <table class="table table-responsive table-striped">
+              <tr>
+                  <th>Ações</th>
+                  <th>Local</th>
+                  <th>Descrição</th>
+                  <th>Qtd Pessoas atualmente</th>
+                  <th>Percentual</th>
+                  <th>Ultima atualização</th>
+                  <th>Google Maps</th>
+              </tr>
+              <tr>
+                  <td><a href="ver"></a>atualizar</td>
+                  <td>Shopping Plaza</td>
+                  <td>Praça alimentação</td>
+                  <td>77 pessoas</td>
+                  <td>67%</td>
+                  <td><a href="https://www.google.com/maps">ver mapa</a></td>
+              </tr>
+          </table>
+          <br />
+      </form>
+      <div class="jumbotron">
+
+        <h2>Locais Personalizados</h2>
+        <br />
+        <form action="/principal/personalizados" method="post">
+    
+            <div class="form-group">
+                <select asp-items="ViewBag.LocaisPublicos" class="form-control"></select>
+            </div>
+    
+            <table class="table table-responsive table-striped">
+                <tr>
+                    <th>Ações</th>
+                    <th>Local</th>
+                    <th>Descrição</th>
+                    <th>Qtd Pessoas atualmente</th>
+                    <th>Percentual</th>
+                    <th>Ultima atualização</th>
+                    <th>Google Maps</th>
+                </tr>
+                <tr>
+                    <td><a href="ver"></a>atualizar</td>
+                    <td>Correios</td>
+                    <td>Recepção</td>
+                    <td>40 pessoas</td>
+                    <td>80%</td>
+                    <td><a href="https://www.google.com/maps">ver mapa</a></td>
+                </tr>
+    
+            </table>
+    
+            <br />
+        </form>
+    </div>
+  
+  </div>
+
+
+      </div>
+
+    </div>
+  </body>
