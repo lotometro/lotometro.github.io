@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const port = 3000;
+const axios = require('axios');
 const qs = require('querystring');
 
 app.use(express.urlencoded({ extended: true }));
@@ -31,12 +32,12 @@ app.post('/login', async (req, res) => {
     if (response.status === 200) {
       res.redirect(`/dashboard/${username}`);
     } else {
-      //res.status(401).send('Usuário ou senha inválidos!');
-      res.redirect(`/dashboard/${username}`);
+      res.status(401).send('Usuário ou senha inválidos!');
+      //res.redirect(`/dashboard/${username}`);
     }
   } catch (error) {
-    //res.status(401).send('Usuário ou senha inválidos!');
-    res.redirect(`/dashboard/${username}`);
+    res.status(401).send('Usuário ou senha inválidos!');
+    //res.redirect(`/dashboard/${username}`);
   }
 });
 

@@ -5,14 +5,14 @@ const password = 'sua_senha';
 
 const options = {
   url: 'http://localhost:9090/api/users/authenticate',
-  method: 'GET',
+  method: 'POST',
   headers: {
     'User-Agent': 'request',
     'Content-Type': 'application/json'
   },
   json: {
-    username: 'lotometro',
-    password: '1234'
+    username: 'Johnny',
+    password: 'potato'
   }
 };
 
