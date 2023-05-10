@@ -15,11 +15,28 @@
       referrerpolicy="no-referrer"
     />
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(() => {
+        $.get('/dados', (data) => {
+          // faça algo com os dados JSON
+          console.log(data);
+        });
+      });
+      </script>
+      <script>
+        $(document).ready(() => {
+          $.get('/dadosCamera', (dataCamera) => {
+            // faça algo com os dados JSON
+            console.log(dataCamera);
+          });
+        });
+        </script>
   </head>
   <body>
     <div class="container">
       <br />
-      <h4>Bem vindo ${username}, selecione um local</h4>
+      <h4>Bem vindo <script> config.access_token </script>, selecione um local</h4>
       <br />
       <div class="jumbotron">
         <h2>Locais Públicos</h2>
@@ -60,6 +77,14 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script>
           var ctx = document.getElementById("myChartPublico").getContext("2d");
+          var dadosCamera = ''; 
+          $.get('/dadosCamera', (dataCamera) => {
+            // faça algo com os dados JSON
+            dadosCamera = dataCamera;
+            $("#data-atual-pu").val(dadosCamera.dataInformacao);
+          
+          
+
           var myChartPublico = new Chart(ctx, {
             type: "doughnut",
             data: {
@@ -67,7 +92,7 @@
               datasets: [
                 {
                   label: "Ocupação",
-                  data: [77, 38, 15],
+                  data: [dadosCamera.lotacaoMaxima, dadosCamera.numeroPessoas, 1],
                   backgroundColor: [
                     "rgba(255, 99, 132, 0.8)",
                     "rgba(54, 162, 235, 0.8)",
@@ -95,6 +120,7 @@
               },
             },
           });
+        });
         </script>
       </div>
       <div class="jumbotron">

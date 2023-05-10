@@ -33,6 +33,40 @@ app.get('/login', (req, res) => {
   res.sendFile(__dirname + '/login.html');
 });
 
+app.get('/dados', (req, res) => {
+  
+  
+  
+  const dados = {
+    nome: 'João',
+    idade: 30,
+    cidade: 'São Paulo'
+  };
+  res.json(dados);
+});
+
+app.get('/dadosCamera', (req, res) => {
+
+  const options = {
+    method: 'GET',
+    url: 'https://lotometroapi.azurewebsites.net/api/camera/getLastByIdLocationAndIdCamera/1/1',
+    headers: {
+      Authorization: `Bearer ${process.env.ACCESS_TOKEN}`
+    }
+  };
+
+  axios(options)
+  .then(response => {
+    console.log(response.data);
+    res.json(response.data);
+  })
+  .catch(error => {
+    console.error(error);
+  });
+  
+});
+
+
 app.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
@@ -51,6 +85,7 @@ app.post('/login', async (req, res) => {
       process.env.ACCESS_TOKEN = token;
   
       if (response.status === 200) {
+        
         res.redirect(`/dashboard/${username}`);
       } else {
         res.status(401).send('Usuário ou senha inválidos!');
