@@ -1,0 +1,1 @@
+{"jwt_secret":"potato","access_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDU3YzFjYmQwY2VkMTFjODhhNDFkMzAiLCJpYXQiOjE2ODM3NTkyMzl9.0jn_w462syj_oJZauAKDHukbqL8zt1qomUknkXPJJo8","rota_Autenticar_cloud":"https://lotometroapi.azurewebsites.net/api/users/authenticate"}

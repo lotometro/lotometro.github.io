@@ -3,9 +3,24 @@ const app = express();
 const port = 3000;
 const axios = require('axios');
 const qs = require('querystring');
+const fs = require('fs');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+const dotenv = require('dotenv');
+
+const config = JSON.parse(fs.readFileSync('./config.json'));
+
+dotenv.config(); // Carrega as variáveis de ambiente
+
+process.env.JWT_SECRET = config.jwt_secret;
+process.env.ACCESS_TOKEN = config.access_token;
+
+// Use as variáveis de ambiente carregadas
+console.log(process.env.JWT_SECRET);
+console.log(process.env.ACCESS_TOKEN);
+
 
 const apiLocalAutenticar = 'http://localhost:9090/api/users/authenticate';
 
@@ -22,19 +37,30 @@ app.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
   try {
-    const response = await axios.post('http://localhost:9090/api/users/authenticate', {
+    const response = await axios.post("https://lotometroapi.azurewebsites.net/api/users/authenticate", {
       username,
       password,
+    })
+    .then(response => {
+      
+      const token = response.data.token;
+      console.log(token); // imprime o token JWT recebido na resposta JSON
+      const config = JSON.parse(fs.readFileSync('./config.json'));
+      config.access_token = token;
+      fs.writeFileSync('./config.json', JSON.stringify(config));
+      process.env.ACCESS_TOKEN = token;
+  
+      if (response.status === 200) {
+        res.redirect(`/dashboard/${username}`);
+      } else {
+        res.status(401).send('Usuário ou senha inválidos!');
+        //res.redirect(`/dashboard/${username}`);
+      }
+    })
+    .catch(error => {
+      console.error(error);
     });
 
-    console.log(response.data);
-
-    if (response.status === 200) {
-      res.redirect(`/dashboard/${username}`);
-    } else {
-      res.status(401).send('Usuário ou senha inválidos!');
-      //res.redirect(`/dashboard/${username}`);
-    }
   } catch (error) {
     res.status(401).send('Usuário ou senha inválidos!');
     //res.redirect(`/dashboard/${username}`);
