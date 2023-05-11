@@ -16,19 +16,12 @@
     />
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-      $(document).ready(() => {
-        $.get('/dados', (data) => {
-          // faça algo com os dados JSON
-          console.log(data);
-        });
-      });
-      </script>
       <script>
         $(document).ready(() => {
           $.get('/dadosCamera', (dataCamera) => {
             // faça algo com os dados JSON
-            console.log(dataCamera);
+            window.dadosCameraGlobais = dataCamera;
+            console.log(dadosCameraGlobais);
           });
         });
         </script>
@@ -76,15 +69,8 @@
         </div>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script>
+          console.log(window.dadosCameraGlobais);
           var ctx = document.getElementById("myChartPublico").getContext("2d");
-          var dadosCamera = ''; 
-          $.get('/dadosCamera', (dataCamera) => {
-            // faça algo com os dados JSON
-            dadosCamera = dataCamera;
-            $("#data-atual-pu").val(dadosCamera.dataInformacao);
-          
-          
-
           var myChartPublico = new Chart(ctx, {
             type: "doughnut",
             data: {
@@ -92,7 +78,7 @@
               datasets: [
                 {
                   label: "Ocupação",
-                  data: [dadosCamera.lotacaoMaxima, dadosCamera.numeroPessoas, 1],
+                  data: [window.dadosCameraGlobais[0].lotacaoMaxima, window.dadosCameraGlobais[0].numeroPessoas, (window.dadosCameraGlobais[0].lotacaoMaxima * 0.02)],
                   backgroundColor: [
                     "rgba(255, 99, 132, 0.8)",
                     "rgba(54, 162, 235, 0.8)",
@@ -120,7 +106,6 @@
               },
             },
           });
-        });
         </script>
       </div>
       <div class="jumbotron">

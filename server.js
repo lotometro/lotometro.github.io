@@ -33,6 +33,10 @@ app.get('/login', (req, res) => {
   res.sendFile(__dirname + '/login.html');
 });
 
+app.get('/cadastro', (req, res) => {
+  res.sendFile(__dirname + '/cadastro.html');
+});
+
 app.get('/dados', (req, res) => {
   
   
@@ -105,6 +109,37 @@ app.post('/login', async (req, res) => {
 app.get('/dashboard/:username', (req, res) => {
   const username = req.params.username;
   res.sendFile(__dirname + '/dashboard.html');
+});
+
+app.post('/cadastrar', async (req, res) => {
+  const { username, password } = req.body;
+
+  try {
+    const response = await axios.post("https://lotometroapi.azurewebsites.net/api/users/register", {
+      username,
+      password,
+    })
+    .then(response => {
+  
+      if (response.status === 200) {
+        
+        res.redirect(`/login`);
+      } else {
+        res.status(401).send('Erro ao cadastrar, tente novamente por favor');
+        //res.redirect(`/dashboard/${username}`);
+      }
+    })
+    .catch(error => {
+      console.error(error);
+    });
+
+  } catch (error) {
+    res.status(401).send('Usuário ou senha inválidos!');
+    //res.redirect(`/dashboard/${username}`);
+  }
+
+
+  
 });
 
 /*
