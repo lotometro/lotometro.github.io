@@ -71,7 +71,7 @@ app.get('/dadosCamera', (req, res) => {
 });
 
 
-app.post('/login', async (req, res) => {
+app.post('/fazerlogin', async (req, res) => {
   const { username, password } = req.body;
 
   try {
@@ -94,6 +94,8 @@ app.post('/login', async (req, res) => {
       } else {
         res.status(401).send('Usuário ou senha inválidos!');
         //res.redirect(`/dashboard/${username}`);
+      } elseif (response.status === 405); {
+        res.redirect('/fazerlogin');
       }
     })
     .catch(error => {

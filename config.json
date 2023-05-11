@@ -1,1 +1,1 @@
-{"jwt_secret":"potato","access_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDVkNzc3M2ZlNzJjZTA3NzQ2YzNjNTMiLCJpYXQiOjE2ODM4NDcwMzd9.e4wz6ufUG4oTBeqdpVyiPbUgIjKC6gTsojG6igxStgw","rota_Autenticar_cloud":"https://lotometroapi.azurewebsites.net/api/users/authenticate"}
+{"jwt_secret":"potato","access_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDVkNzc3M2ZlNzJjZTA3NzQ2YzNjNTMiLCJpYXQiOjE2ODM4NDc2ODl9.9E6_E6UcAjXM7O5rgG6Jcv5J9ClqWEMO_WpiT-7E2EM","rota_Autenticar_cloud":"https://lotometroapi.azurewebsites.net/api/users/authenticate"}
