@@ -17,19 +17,15 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       <script>
-        $(document).ready(() => {
-          $.get('/dadosCamera', (dataCamera) => {
-            // faça algo com os dados JSON
-            window.dadosCameraGlobais = dataCamera;
-            console.log(dadosCameraGlobais);
-          });
-        });
+       // $(document).ready(() => {
+          
+       // });
         </script>
   </head>
   <body>
     <div class="container">
       <br />
-      <h4>Bem vindo <script> config.access_token </script>, selecione um local</h4>
+      <h4>Bem vindo, selecione um local</h4>
       <br />
       <div class="jumbotron">
         <h2>Locais Públicos</h2>
@@ -69,7 +65,13 @@
         </div>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script>
+          $.get('/dadosCamera', (dataCamera) => {
+            // faça algo com os dados JSON
+            window.dadosCameraGlobais = dataCamera;
+            console.log(dadosCameraGlobais);
+          });
           console.log(window.dadosCameraGlobais);
+          
           var ctx = document.getElementById("myChartPublico").getContext("2d");
           var myChartPublico = new Chart(ctx, {
             type: "doughnut",
